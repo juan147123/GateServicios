@@ -8,6 +8,12 @@
 ```
 > composer install
 ```
+## Crear carpetas en el directorio raiz con el nombre
+
+```
+- imagePath
+- reportes
+```
 ## Ininiciar el proyecto 
 
 ```
