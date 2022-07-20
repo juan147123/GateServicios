@@ -743,6 +743,7 @@ $app->group('/api/', function (RouteCollectorProxy $group) {
         $description = $daatos['description'];
         $ruc = $daatos['ruc'];
         $headquarter = $daatos['headquarter'];
+        $rucHidden = $daatos['rucHidden'];
         $id = $daatos['id'];
 
         $data = $this->get('db')->update('company', [
@@ -755,7 +756,7 @@ $app->group('/api/', function (RouteCollectorProxy $group) {
         $data = $this->get('db')->update('user', [
             "name" => $name,
             "ndocument" => $ruc,
-        ]);
+        ], ['ndocument' => $rucHidden]);
 
         if ($data) {
             $data = array("Respuesta" => "Se actualizo Correctamente");
