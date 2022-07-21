@@ -9,8 +9,8 @@ class correo
 {
     static public function enviarEmail($email)
     {
-        $email_user = "angelotiniano.c@gmail.com";
-        $email_password = "ytefqutqxodlaemj";
+        $email_user = "diegomiguelnunezore@gmail.com";
+        $email_password = "xurxmvpyqogvinxa";
         $the_subject = "Cambio de contraseña";
         $address_to = $email;
         $from_name = "GATE TECH SAC";
@@ -34,11 +34,11 @@ class correo
                     <div>
                     <h1>Hemos recibido una petición para restablecer la contraseña de tu cuenta.</h1>
                     <p>Si hiciste esta petición, haz clic en el siguiente botón, si no hiciste esta petición puedes ignorar este correo.</p>
-                    <form action="http://localhost/tega/administrador/changepass" method="post">
+                    <form action="http://localhost/gateadministrador/GateAdministrador/changepass" method="post">
                         <strong>Enlace para restablecer tu contraseña</strong><br>
                         <input type="hidden"id="emaildesdecorreo" name="emaildesdecorreo" value="' . $email . '">
                         <button type="submit" style="width: 160px;
-                        background-color: #f8981d;
+                        background-color: #0e12eb;
                         border: none;
                         outline: none;
                         height: 40px;
