@@ -14,7 +14,7 @@
 - imagePath
 - reportes
 ```
-## Ininiciar el proyecto 
+## Iniciar el proyecto 
 
 ```
 > composer start
