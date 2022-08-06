@@ -150,6 +150,11 @@ $app->post('/login', function ($request, $response, array $args) {
             return $response
                 ->withHeader('Content-Type', 'application/json');
         }
+    }else{
+         $data = array("Error" => "error");
+          $response->getBody()->write(json_encode($data));
+            return $response
+                ->withHeader('Content-Type', 'application/json');
     }
 });
 
@@ -2775,7 +2780,7 @@ $app->group('/api/', function (RouteCollectorProxy $group) {
             [
                 '[><]equipment(eq)' => ['tr.equipmentId' => 'id'],
                 '[><]company(c)' => ['eq.companyId' => 'id'],
-                '[>]company_employees(ce)' => ['tr.supervisorUserId' => 'id'],
+                 '[>]company_employees(ce)' => ['tr.supervisorUserId' => 'id'],
                 '[>]company_employees(cem)' => ['tr.supervisorMinId' => 'id'],
                 '[>]fill_level(fl)' => ['tr.id' => 'technicalReviewId'],
                 '[>]flash_wear(fw)' => ['tr.id' => 'technicalReviewId'],
@@ -2792,6 +2797,7 @@ $app->group('/api/', function (RouteCollectorProxy $group) {
                 "tr.equipmentId",
                 "tr.technicalUserId",
                 "tr.supervisorUserId",
+                "tr.supervisorMinId",
                 "tr.target",
                 "tr.pathPdf",
                 "fill_level" => [
@@ -2840,7 +2846,7 @@ $app->group('/api/', function (RouteCollectorProxy $group) {
                         "c.headquarter",
                     ],
                 ],
-                "emplJCM" => [
+                 "emplJCM" => [
                     'ce.id(id_emplJ)',
                     'ce.Name(nameempJ)',
                     'ce.document(docempJ)',
@@ -3248,38 +3254,38 @@ $app->group('/api/', function (RouteCollectorProxy $group) {
 
             $pdfcontent = '
                 <body>
-                    <table class="cuerpo" style="padding: 1em; border: 10px solid #0046f7;">
+                    <table class="cuerpo">
                         <thead>
-                            <tr style="border: 5px solid #0046f7;">
+                            <tr style="border: 1px solid #0046f7;">
                                 <td colspan="3">
                                     <table>
                                         <tbody>
-                                            <tr>
-                                                <td style="text-align: left;"><img src="images/logoGate.png"  width="600" height="400"></td>
-                                                <td style="text-align: right;font-size: 3rem;font-weight: bold;">REPORTE TÉCNICO</td>
-                                                <td width="36%" style="text-align: right;font-size: 1.5rem;color:grey";font-weight: bold;></td>
-                                            </tr>
+                                        <tr>
+                                            <td style="text-align: left;"><img src="images/logoGate.png"  width="350" height="250"></td>
+                                            <td style="text-align: rigth;font-size: 3rem;font-weight: bold;">SERVICIO DE REPORTE</td>
+                                            <td style="text-align: left;font-size: 3rem;font-weight: bold;"></td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </td>
                             </tr>
                         </thead>
                         <tbody>            
-                            <tr style="border: 5px solid #0046f7;">
+                            <tr style="border: 1px solid #0046f7;">
                                 <td>
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td style="text-align: left;border: 5px solid #0046f7;background: #018fd5;color: #fff;font-size: 1.8rem;font-weight: bold;">Minera</td>
-                                                <td style="border: 5px solid #0046f7;font-size: 1.8rem;font-weight: bold;">' . $data[0]['equipment']['companyId']['name'] . '</td>
+                                                <td style="text-align: left;border: 1px solid #0046f7;background: #018fd5;color: #fff;font-size: 1.8rem;font-weight: bold;">Minera</td>
+                                                <td style="border: 1px solid #0046f7;font-size: 1.8rem;font-weight: bold;">' . $data[0]['equipment']['companyId']['name'] . '</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: left;border: 5px solid #0046f7;background: #018fd5;color: #fff;font-size: 1.8rem;font-weight: bold;">Equipo</td>
-                                                <td style="border: 5px solid #0046f7;font-size: 1.8rem;font-weight: bold;">' . $data[0]['equipment']['desequip'] . '</td>
+                                                <td style="text-align: left;border: 1px solid #0046f7;background: #018fd5;color: #fff;font-size: 1.8rem;font-weight: bold;">Equipo</td>
+                                                <td style="border: 1px solid #0046f7;font-size: 1.8rem;font-weight: bold;">' . $data[0]['equipment']['desequip'] . '</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: left;border: 5px solid #0046f7;background: #018fd5;color: #fff;font-size: 1.8rem;font-weight: bold;">Supervisor JCM</td>
-                                                <td style="border: 5px solid #0046f7;font-size: 1.8rem;font-weight: bold;">' . $data[0]['emplJCM']['nameempJ'] . '</td>
+                                                <td style="text-align: left;border: 1px solid #0046f7;background: #018fd5;color: #fff;font-size: 1.8rem;font-weight: bold;">Supervisor JCM</td>
+                                                <td style="border: 1px solid #0046f7;font-size: 1.8rem;font-weight: bold;">' . $data[0]['emplJCM']['nameempJ'] . '</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -3288,34 +3294,34 @@ $app->group('/api/', function (RouteCollectorProxy $group) {
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td style="text-align: left;border: 5px solid #0046f7;background: #018fd5;color: #fff;font-size: 1.8rem;font-weight: bold;">Fecha</td>
-                                                <td style="border: 5px solid #0046f7;font-size: 1.8rem;font-weight: bold;">' . $fechainspeccion . '</td>
+                                                <td style="text-align: left;border: 1px solid #0046f7;background: #018fd5;color: #fff;font-size: 1.8rem;font-weight: bold;">Fecha</td>
+                                                <td style="border: 1px solid #0046f7;font-size: 1.8rem;font-weight: bold;">' . $fechainspeccion . '</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: left;border: 5px solid #0046f7;background: #018fd5;color: #fff;font-size: 1.8rem;font-weight: bold;">Supervisor Minera</td>
-                                                <td style="border: 5px solid #0046f7;font-size: 1.8rem;font-weight: bold;">' . $data[0]['emplMIN']['nameempM'] . '</td>
+                                                <td style="text-align: left;border: 1px solid #0046f7;background: #018fd5;color: #fff;font-size: 1.8rem;font-weight: bold;">Supervisor Minera</td>
+                                                <td style="border: 1px solid #0046f7;font-size: 1.8rem;font-weight: bold;">' . $data[0]['emplMIN']['nameempM'] . '</td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: left;border: 5px solid #0046f7;background: #018fd5;color: #fff;font-size: 1.8rem;font-weight: bold;">Realizado por:</td>
-                                                <td style="border: 5px solid #0046f7;font-size: 1.8rem;font-weight: bold;">' . $data[0]['user']['NameU'] . '</td>
+                                                <td style="text-align: left;border: 1px solid #0046f7;background: #018fd5;color: #fff;font-size: 1.8rem;font-weight: bold;">Realizado por:</td>
+                                                <td style="border: 1px solid #0046f7;font-size: 1.8rem;font-weight: bold;">' . $data[0]['user']['NameU'] . '</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </td>
                             </tr>            
                             <tr>
-                                <td colspan="3" style="border: 5px solid #0046f7;background: #018fd5;color: #fff;font-size: 2.3rem;font-weight: bold;">Objetivos de la inspección y Hallazgos.</td>
+                                <td colspan="3" style="border: 1px solid #0046f7;background: #018fd5;color: #fff;font-size: 2.3rem;font-weight: bold;">Objetivos de la inspección y Hallazgos.</td>
                             </tr>
                             <tr>
-                                <td colspan="3" style="border: 5px solid #0046f7;font-size: 1.8rem;font-weight: bold;">Objetivo:' . $data[0]['target'] . '</td>
+                                <td colspan="3" style="border: 1px solid #0046f7;font-size: 1.8rem;font-weight: bold;">Objetivo:' . $data[0]['target'] . '</td>
                             </tr>
-                            <tr style="border: 5px solid #0046f7;">
+                            <tr style="border: 1px solid #0046f7;">
                                 <td colspan="3" style="font-size: 1.8rem; text-align: justify;">
                                 ' . $data[0]['content'] . '
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3" style="border: 5px solid #0046f7;background: #018fd5;color: #fff;font-size: 2rem;font-weight: bold;">REGISTROS FOTOGRAFICOS</td>
+                                <td colspan="3" style="border: 1px solid #0046f7;background: #018fd5;color: #fff;font-size: 2rem;font-weight: bold;">REGISTROS FOTOGRAFICOS</td>
                             </tr>            
                             <tr>
                                 <td colspan="3">
@@ -3327,7 +3333,7 @@ $app->group('/api/', function (RouteCollectorProxy $group) {
                                 </td>                
                             </tr>
                             <tr>
-                                <td colspan="3" style="border: 5px solid #0046f7;font-size: 2rem;font-weight: bold;color: #c50c0c;">
+                                <td colspan="3" style="font-size: 2rem;font-weight: bold;color: #c50c0c;">
                                     Estimación de desgaste Flash en Terreno.
                                 </td>
                             </tr>';
@@ -3490,16 +3496,16 @@ $app->group('/api/', function (RouteCollectorProxy $group) {
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3" style="border: 5px solid #0046f7;background: #018fd5;color: #fff;font-size: 2.3rem;font-weight: bold;">Conclusiones y Recomendaciones</td>
+                                <td colspan="3" style="border: 1px solid #0046f7;background: #018fd5;color: #fff;font-size: 2.3rem;font-weight: bold;">Conclusiones y Recomendaciones</td>
                             </tr>
                             <tr>
-                                <td colspan="3" style="border: 5px solid #0046f7;font-size: 1.8rem;text-align:justify;">' . $data[0]['conclusions'] . '</td>
+                                <td colspan="3" style="border: 1px solid #0046f7;font-size: 1.8rem;text-align:justify;">' . $data[0]['conclusions'] . '</td>
                             </tr>
                         </tbody>
                     </table>
                 </body>
                 ';
-            $nombrePdf = uniqid() . 'QuickReport';
+            $nombrePdf = uniqid() . 'ReporteTecnico';
 
 
             $data = $this->get('db')->update(

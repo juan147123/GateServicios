@@ -34,7 +34,7 @@ class correo
                     <div>
                     <h1>Hemos recibido una petición para restablecer la contraseña de tu cuenta.</h1>
                     <p>Si hiciste esta petición, haz clic en el siguiente botón, si no hiciste esta petición puedes ignorar este correo.</p>
-                    <form action="http://localhost/gateadministrador/GateAdministrador/changepass" method="post">
+                    <form action="http://gatetechsac.gsystemperu.com/changepass" method="post">
                         <strong>Enlace para restablecer tu contraseña</strong><br>
                         <input type="hidden"id="emaildesdecorreo" name="emaildesdecorreo" value="' . $email . '">
                         <button type="submit" style="width: 160px;
